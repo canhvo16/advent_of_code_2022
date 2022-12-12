@@ -32,7 +32,55 @@ const findScore = (strategy) => {
   console.log(totalScore)
 }
 
+const findScore2 = (strategy) => {
+  const oppA = {
+    win: 2,
+    tie: 1,
+    loss: 3
+  }
+  const oppB = {
+    win: 3,
+    tie: 2,
+    loss: 1
+  }
+  const oppC = {
+    win: 1,
+    tie: 3,
+    loss: 2
+  }
+  const result = {
+    X: 0,
+    Y: 3,
+    Z: 6
+  }
+  let totalScore = 0
+  for (let i = 0; i < strategy.length; i++) {
+    if (strategy[i] !== '') {
+      let opp = strategy[i][0]
+      let strat = strategy[i][2]
+      totalScore += result[strat]
+      let outcome
+      if (strat == 'X') {
+        outcome = 'loss'
+      } else if (strat == 'Y') {
+        outcome = 'tie'
+      } else if (strat == 'Z') {
+        outcome = 'win'
+      }
+      if (opp == 'A') {
+        totalScore += oppA[outcome]
+      } else if (opp == 'B') {
+        totalScore += oppB[outcome]
+      } else if (opp == 'C') {
+        totalScore += oppC[outcome]
+      }
+    }
+  }
+  console.log(totalScore)
+}
+
 findScore(textByLine)
+findScore2(textByLine)
 
 /*
 iterate through array
@@ -58,4 +106,33 @@ for each iteration:
       Z & C
   calc result for yourself and add result points to current rounds points
   add current round points to total score
+*/
+
+/*
+first column is opp choice
+second column is result
+  hashmap of results and points 
+iterate through array
+  get opp choice
+  get result
+  add result points to total score
+  calc needed choice
+  for A:
+    ''win'' = 2
+    ''tie'' = 1
+    ''loss'' = 3
+  for B:
+    ''win'' = 3
+    ''tie'' = 2
+    ''loss'' = 1
+  for C:
+    ''win'' = 1
+    ''tie'' = 3
+    ''loss'' = 2
+  for result:
+    X = 0,
+    Y = 3,
+    z = 6
+  add choice points to total score
+return total points
 */
