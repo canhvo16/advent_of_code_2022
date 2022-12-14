@@ -22,7 +22,32 @@ const findFullyOverlappedPairs = (pairs) => {
   console.log(counter)
 }
 
-findFullyOverlappedPairs(textByLine)
+const findOverlappedPairs = (pairs) => {
+  let counter = 0
+  for (let i = 0; i < pairs.length; i++) {
+    if (pairs[i]) {
+      let first = pairs[i].split(',')[0]
+      let second = pairs[i].split(',')[1]
+      let lowerFirst = parseInt(first.split('-')[0])
+      let upperFirst = parseInt(first.split('-')[1])
+      let lowerSecond = parseInt(second.split('-')[0])
+      let upperSecond = parseInt(second.split('-')[1])
+      if (lowerFirst >= lowerSecond && upperFirst <= upperSecond) {
+        counter++
+      } else if (lowerFirst <= lowerSecond && upperFirst >= upperSecond) {
+        counter++
+      } else if (lowerFirst <= upperSecond && upperFirst > lowerSecond) {
+        counter++
+      } else if (upperFirst >= lowerSecond && lowerFirst < upperSecond) {
+        counter++
+      }
+    }
+  }
+  console.log(counter)
+}
+
+// findFullyOverlappedPairs(textByLine)
+findOverlappedPairs(textByLine)
 
 /*
 have a counter var
