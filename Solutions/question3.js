@@ -21,9 +21,9 @@ const calculatePriorityScore = (backpacks) => {
     let half = backpacks[i].length / 2
     let firstCompartment = backpacks[i].slice(0, half)
     let secondCompartment = backpacks[i].slice(half, backpacks[i].length)
-    for (let i = 0; i < secondCompartment.length; i++) {
-      if (firstCompartment.includes(secondCompartment[i])) {
-        commonLetters.push(secondCompartment[i])
+    for (let j = 0; j < secondCompartment.length; j++) {
+      if (firstCompartment.includes(secondCompartment[j])) {
+        commonLetters.push(secondCompartment[j])
         break
       }
     }
@@ -36,7 +36,28 @@ const calculatePriorityScore = (backpacks) => {
   console.log(priorityScore)
 }
 
+const calculateBadgeScore = (backpacks) => {
+  let badgeScore = 0
+  let badgeList = []
+  for (let i = 0; i < backpacks.length; i += 3) {
+    let first = backpacks[i]
+    let second = backpacks[i + 1]
+    let third = backpacks[i + 2]
+    for (let j = 0; j < first.length; j++) {
+      if (second.includes(first[j]) && third.includes(first[j])) {
+        badgeList.push(first[j])
+        break
+      }
+    }
+  }
+  for (const letter of badgeList) {
+    badgeScore += letterValues[letter]
+  }
+  console.log(badgeScore)
+}
+
 calculatePriorityScore(textByLine)
+calculateBadgeScore(textByLine)
 
 /*
 need hashmap of alphabet letters and priority score
@@ -48,3 +69,12 @@ iterate through list of backpacks
     get value of each character and add to priority score
 return score
  */
+
+/*
+iterate through backpacks 3 at a time
+  create 3 different packbacks 
+  pick one and iterate through one of the backpacks and find the shared letter
+  add letter to list of letters
+iterate through list of letters
+  add value of each letter to total
+*/
